@@ -35,9 +35,19 @@ type Cap struct {
 	Perm string `json:"perm"`
 }
 
+//GetUsers - list all RGW users
+func (api *API) GetUsers() (*[]string, error) {
+	body, err := api.Query("GET", "/metadata/user", nil)
+	if err != nil {
+		return nil, err
+	}
+	var ref *[]string
+	err = json.Unmarshal(body, &ref)
+	return ref, err
+}
+
 //GetUser - http://docs.ceph.com/docs/mimic/radosgw/adminops/#get-user-info
 func (api *API) GetUser(user User) (*User, error) {
-
 	body, err := api.Query("GET", "/user", GetValues(user))
 	if err != nil {
 		return nil, err
