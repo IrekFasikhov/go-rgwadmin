@@ -2,7 +2,6 @@ package rgwadmin
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 )
 
@@ -45,7 +44,6 @@ func (api *API) GetUser(user User) (*User, error) {
 	}
 	ref := &User{}
 	err = json.Unmarshal(body, &ref)
-	fmt.Println(string(body))
 	return ref, err
 }
 
